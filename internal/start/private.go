@@ -125,7 +125,7 @@ func PrivateMode() {
 	c.UseModules(
 		check.ValidateOpValues(),
 		paymaster.CheckStatus(),
-		check.SimulateOp(),
+		// check.SimulateOp(),
 		paymaster.IncOpsSeen(),
 	)
 
@@ -148,7 +148,7 @@ func PrivateMode() {
 		check.PaymasterDeposit(),
 		relayer.SendUserOperation(),
 		paymaster.IncOpsIncluded(),
-		check.Clean(),
+		// check.Clean(),
 	)
 	if err := b.Run(); err != nil {
 		log.Fatal(err)
