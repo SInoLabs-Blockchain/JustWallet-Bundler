@@ -144,7 +144,7 @@ func PrivateMode() {
 		gasprice.FilterUnderpriced(),
 		batch.SortByNonce(),
 		batch.MaintainGasLimit(conf.MaxBatchGasLimit),
-		check.CodeHashes(),
+		// check.CodeHashes(),
 		check.PaymasterDeposit(),
 		relayer.SendUserOperation(),
 		paymaster.IncOpsIncluded(),
