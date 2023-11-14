@@ -52,7 +52,7 @@ func TraceSimulateValidation(
 	opts := utils.TraceCallOpts{
 		Tracer: tracer.Loaded.BundlerCollectorTracer,
 	}
-	if err := rpc.CallContext(context.Background(), &res, "debug_traceCall", &req, "latest", &opts); err != nil {
+	if err := rpc.CallContext(context.Background(), &res, "debug_traceTransaction", &req, "latest", &opts); err != nil {
 		return nil, err
 	}
 

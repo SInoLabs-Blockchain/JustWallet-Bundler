@@ -93,7 +93,7 @@ func TraceSimulateHandleOp(in *TraceInput) (*TraceOutput, error) {
 	opts := utils.TraceCallOpts{
 		Tracer: tracer.Loaded.BundlerExecutionTracer,
 	}
-	if err := in.Rpc.CallContext(context.Background(), &res, "debug_traceCall", &req, "latest", &opts); err != nil {
+	if err := in.Rpc.CallContext(context.Background(), &res, "debug_traceTransaction", &req, "latest", &opts); err != nil {
 		return nil, err
 	}
 	outErr, err := errors.ParseHexToRpcDataError(res.Output)

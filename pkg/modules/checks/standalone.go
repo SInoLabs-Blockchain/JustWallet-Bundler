@@ -105,19 +105,25 @@ func (s *Standalone) SimulateOp() modules.UserOpHandlerFunc {
 			return nil
 		})
 		g.Go(func() error {
-			ic, err := simulation.TraceSimulateValidation(
-				s.rpc,
-				ctx.EntryPoint,
-				ctx.UserOp,
-				ctx.ChainID,
-				simulation.EntityStakes{
-					ctx.UserOp.GetFactory():   ctx.GetDepositInfo(ctx.UserOp.GetFactory()),
-					ctx.UserOp.Sender:         ctx.GetDepositInfo(ctx.UserOp.Sender),
-					ctx.UserOp.GetPaymaster(): ctx.GetDepositInfo(ctx.UserOp.GetPaymaster()),
-				},
-			)
-			if err != nil {
-				return errors.NewRPCError(errors.BANNED_OPCODE, err.Error(), err.Error())
+			// ic, err := simulation.TraceSimulateValidation(
+			// 	s.rpc,
+			// 	ctx.EntryPoint,
+			// 	ctx.UserOp,
+			// 	ctx.ChainID,
+			// 	simulation.EntityStakes{
+			// 		ctx.UserOp.GetFactory():   ctx.GetDepositInfo(ctx.UserOp.GetFactory()),
+			// 		ctx.UserOp.Sender:         ctx.GetDepositInfo(ctx.UserOp.Sender),
+			// 		ctx.UserOp.GetPaymaster(): ctx.GetDepositInfo(ctx.UserOp.GetPaymaster()),
+			// 	},
+			// )
+			// if err != nil {
+			// 	return errors.NewRPCError(errors.BANNED_OPCODE, err.Error(), err.Error())
+			// }
+
+			ic := []common.Address{
+				ctx.UserOp.GetFactory(),
+				ctx.UserOp.Sender,
+				ctx.UserOp.GetPaymaster(),
 			}
 
 			ch, err := getCodeHashes(ic, gc)
