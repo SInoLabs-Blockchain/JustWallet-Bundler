@@ -1,8 +1,6 @@
 package gasprice
 
 import (
-	"math/big"
-
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/stackup-wallet/stackup-bundler/pkg/modules"
 	"github.com/stackup-wallet/stackup-bundler/pkg/userop"
@@ -15,10 +13,10 @@ func FilterUnderpriced() modules.BatchHandlerFunc {
 		b := []*userop.UserOperation{}
 		for _, op := range ctx.Batch {
 			if ctx.BaseFee != nil && ctx.BaseFee.Cmp(common.Big0) != 0 && ctx.Tip != nil {
-				gp := big.NewInt(0).Add(ctx.BaseFee, ctx.Tip)
-				if op.GetDynamicGasPrice(ctx.BaseFee).Cmp(gp) >= 0 {
-					b = append(b, op)
-				}
+				// gp := big.NewInt(0).Add(ctx.BaseFee, ctx.Tip)
+				// if op.GetDynamicGasPrice(ctx.BaseFee).Cmp(gp) >= 0 {
+				b = append(b, op)
+				// }
 			} else if ctx.GasPrice != nil {
 				if op.MaxFeePerGas.Cmp(ctx.GasPrice) >= 0 {
 					b = append(b, op)

@@ -4,7 +4,6 @@ import (
 	bytesPkg "bytes"
 	"context"
 	"errors"
-	"math"
 	"math/big"
 	"time"
 
@@ -62,7 +61,6 @@ func EstimateHandleOpsGas(opts *Opts) (gas uint64, revert *reverts.FailedOpRever
 	if err != nil {
 		return 0, nil, err
 	}
-	auth.GasLimit = math.MaxUint64
 	auth.NoSend = true
 
 	tx, err := ep.HandleOps(auth, toAbiType(opts.Batch), opts.Beneficiary)
